@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--控件间距-->
+    <dimen name="dp_4">4dp</dimen>
+    <dimen name="dp_8">8dp</dimen>
+    <dimen name="dp_14">14dp</dimen>
+    <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_22">22dp</dimen>
+    <dimen name="dp_32">32dp</dimen>
+    <dimen name="dp_36">36dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_46">46dp</dimen>
+    <dimen name="dp_60">60dp</dimen>
+    <dimen name="dp_72">72dp</dimen>
+
+    <dimen name="spacing_left_16">16dp</dimen>
+    <dimen name="spacing_right_16">16dp</dimen>
+    <dimen name="spacing_up_16">16dp</dimen>
+    <dimen name="spacing_down_16">16dp</dimen>
+
+    <dimen name="horizontal_16">16dp</dimen>
+    <dimen name="vertical_16">16dp</dimen>
+    <!-- 字体大小 -->
+    <!--大-->
+    <dimen name="font_large_22">22sp</dimen>
+    <dimen name="font_large_18">18sp</dimen>
+    <!--正常-->
+    <dimen name="font_normal_16">16sp</dimen>
+    <!--小-->
+    <dimen name="font_small_12">12sp</dimen>
+</resources>

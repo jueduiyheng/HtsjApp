@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--白色Textiew点击效果-->
+    <item android:color="@color/md_grey_400" android:state_focused="true" />
+    <item android:color="@color/md_grey_400" android:state_pressed="true" />
+    <item android:color="@color/white" />
+
+</selector>

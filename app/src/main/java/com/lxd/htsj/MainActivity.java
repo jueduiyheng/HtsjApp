@@ -1,7 +1,6 @@
 package com.lxd.htsj;
 
 import android.Manifest;
-import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -14,12 +13,7 @@ import com.flyco.tablayout.CommonTabLayout;
 import com.flyco.tablayout.listener.CustomTabEntity;
 import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.lxd.htsj.Base.BaseActivity;
-import com.lxd.htsj.Constant.Constant;
-import com.lxd.htsj.Entity.Login;
 import com.lxd.htsj.Entity.TabEntity;
-import com.lxd.htsj.MVP.HomeRecommendFragmentView;
-import com.lxd.htsj.MVP.presenter.HomeRecommendFragmentPresenter;
-import com.lxd.htsj.MVP.view.Activity.Main2Activity;
 import com.lxd.htsj.Util.TitleBuilder;
 import com.lxd.htsj.Util.listener.PermissionsResultListener;
 import com.orhanobut.logger.Logger;
@@ -29,9 +23,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class MainActivity extends BaseActivity implements HomeRecommendFragmentView {
-    @BindView(R.id.main_progress)
-    ProgressActivity mainProgress;
+public class MainActivity extends BaseActivity {
     @BindView(R.id.vp_2)
     ViewPager vp2;
     @BindView(R.id.tl_2)
@@ -40,8 +32,6 @@ public class MainActivity extends BaseActivity implements HomeRecommendFragmentV
     TextView titlebarIvLeft;
     @BindView(R.id.titlebar_tv_right)
     TextView titlebarTvRight;
-
-    private HomeRecommendFragmentPresenter presenter;
     private String[] mTitles = {"首页", "消息", "联系人", "更多"};
     private ArrayList<CustomTabEntity> mTabEntities = new ArrayList<>();
 
@@ -139,7 +129,6 @@ public class MainActivity extends BaseActivity implements HomeRecommendFragmentV
 
     @Override
     protected void initLogic() {
-//        RxView.clicks(titlebarIvLeft).throttleFirst(3000, TimeUnit.MILLISECONDS).subscribe(new Action1<Void>() {
 //            @Override
 //            public void call(Void aVoid) {
 //                Logger.d("点击厦门");
@@ -151,8 +140,6 @@ public class MainActivity extends BaseActivity implements HomeRecommendFragmentV
     protected void widgetClick(View v) {
         switch (v.getId()) {
             case R.id.titlebar_iv_left:
-                presenter = new HomeRecommendFragmentPresenter(this);
-                presenter.LoadData();
                 Logger.d("返回");
                 break;
             case R.id.titlebar_tv_right:
@@ -175,45 +162,7 @@ public class MainActivity extends BaseActivity implements HomeRecommendFragmentV
     }
 
     @Override
-    public void showProgress() {
-        titlebarIvLeft.setEnabled(false);
-        mainProgress.showLoading();
-
-        showLoadingDialog(1, "获取中...", R.drawable.ic_launcher);
-    }
-
-    @Override
-    public void hideProgress() {
-        cancelLoadingDialog();
-        mainProgress.showContent();
-
-    }
-
-    @Override
-    public void newDatas(Login data) {
-        cancelLoadingDialog();
-        titlebarIvLeft.setEnabled(true);
-//        titlebarIvLeft.setClickable(true);
-        startActivity(new Intent(MainActivity.this, Main2Activity.class));
-    }
-
-    @Override
-    public void showLoadFailMsg() {
-        cancelLoadingDialog();
-        toError();
-    }
-
-    public void toError() {
-        mainProgress.showError(getResources().getDrawable(
-                R.mipmap.load_error), Constant.ERROR_TITLE,
-                Constant.ERROR_CONTEXT, Constant.ERROR_BUTTON,
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mainProgress.showLoading();
-                        //重试
-                        presenter.LoadData();
-                    }
-                });
+    public void onBackPressed() {
+        finish();
     }
 }

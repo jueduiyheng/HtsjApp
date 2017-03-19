@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.lxd.htsj.Base.BaseFragment;
+import com.lxd.htsj.MVP.view.Activity.Main2Activity;
+import com.lxd.htsj.MainActivity;
 import com.lxd.htsj.R;
 import com.orhanobut.logger.Logger;
 
@@ -23,7 +25,6 @@ import butterknife.ButterKnife;
 public class Fragment extends BaseFragment implements View.OnClickListener {
     //    @BindView(R.id.textView)
 //    TextView textView;
-
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         return inflater.inflate(R.layout.fragment_home, container, false);
@@ -51,9 +52,11 @@ public class Fragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (fastClick()) {
-//            Toast.makeText(getActivity(), "点击", Toast.LENGTH_SHORT).show();
+            MainActivity activity = (MainActivity) getActivity();
+            activity.mSwipeBackHelper.forward(Main2Activity.class);
             Logger.d("点击");
 
         }
     }
+
 }

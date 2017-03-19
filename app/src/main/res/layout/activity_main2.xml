@@ -4,13 +4,22 @@
     android:id="@+id/activity_main2"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     android:orientation="vertical"
     tools:context="com.lxd.htsj.MVP.view.Activity.Main2Activity">
 
+    <include layout="@layout/inc_toolbar" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview"
+    <com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity
+        android:id="@+id/main_progress"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity>
 
 </LinearLayout>

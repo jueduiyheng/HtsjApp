@@ -7,18 +7,26 @@ import android.widget.Toast;
 
 import com.lxd.htsj.Adapter.MainAdapter;
 import com.lxd.htsj.Base.BaseActivity;
+import com.lxd.htsj.Constant.Constant;
 import com.lxd.htsj.Constant.Data;
+import com.lxd.htsj.Entity.Login;
 import com.lxd.htsj.Entity.MainDateDto;
+import com.lxd.htsj.MVP.HomeRecommendFragmentView;
+import com.lxd.htsj.MVP.presenter.HomeRecommendFragmentPresenter;
 import com.lxd.htsj.R;
 import com.orhanobut.logger.Logger;
 import com.xiaochao.lcrapiddeveloplibrary.BaseQuickAdapter;
+import com.xiaochao.lcrapiddeveloplibrary.viewtype.ProgressActivity;
 
 import butterknife.BindView;
 
-public class Main2Activity extends BaseActivity {
+public class Main2Activity extends BaseActivity implements HomeRecommendFragmentView {
+    @BindView(R.id.main_progress)
+    ProgressActivity mainProgress;
     @BindView(R.id.recyclerview)
     RecyclerView recyclerView;
     private BaseQuickAdapter homeAdapter;
+    private HomeRecommendFragmentPresenter presenter;
 
     @Override
     protected int initUI() {
@@ -27,6 +35,9 @@ public class Main2Activity extends BaseActivity {
 
     @Override
     protected void init() {
+        setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("测试 RecyclerView");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //设置RecyclerView的显示模式ListVew
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //设置适配器
@@ -51,6 +62,8 @@ public class Main2Activity extends BaseActivity {
     @Override
     protected void initLogic() {
 
+        presenter = new HomeRecommendFragmentPresenter(this);
+        presenter.LoadData();
     }
 
     @Override
@@ -59,7 +72,36 @@ public class Main2Activity extends BaseActivity {
     }
 
     @Override
-    public void onClick(View v) {
+    public void showProgress() {
+        mainProgress.showLoading();
+    }
 
+    @Override
+    public void hideProgress() {
+        mainProgress.showContent();
+    }
+
+    @Override
+    public void newDatas(Login data) {
+
+    }
+
+    @Override
+    public void showLoadFailMsg() {
+        toError();
+    }
+
+    public void toError() {
+        mainProgress.showError(getResources().getDrawable(
+                R.mipmap.load_error), Constant.ERROR_TITLE,
+                Constant.ERROR_CONTEXT, Constant.ERROR_BUTTON,
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mainProgress.showLoading();
+                        //重试
+                        presenter.LoadData();
+                    }
+                });
     }
 }
